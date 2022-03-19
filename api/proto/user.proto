@@ -1,0 +1,31 @@
+syntax = "proto3";
+package v1;
+
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = ".;proto";
+
+message User{
+    int64 id = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+    string phone = 5;
+    string address = 6;
+    int64 created_at = 7;
+    int64 updated_at = 8;
+}
+
+message Users{
+    repeated User users = 1;
+}
+
+service UserService {
+    rpc Read(google.protobuf.Empty) returns (Users) {
+        option (google.api.http) = {
+            get: "/users"
+        };
+    }
+}
